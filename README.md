@@ -11,7 +11,7 @@ Mentions between users and used hastags have been analyzed and compared to their
 ![folder structure](https://raw.githubusercontent.com/loris2222/brexit-tweet-analysis/master/pics/datafolder.png)  
 
 ### Using the preprocessed files and the first 7200 tweets from the dataset
-- Copy the contents of `/preprocessed` into `/data`
+- Create a `/data` folder and copy the contents of `/preprocessed` into `/data`
 
 ## Running
 Follow the **workflow** appendix in the **report** to run the project.  
