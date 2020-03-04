@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+    <title>Neovis.js Simple Example</title>
+    <style type="text/css">
+        html, body {
+            font: 16pt arial;
+        }
+
+        #viz {
+            width: 1920px;
+            height: 1080px;
+            border: 1px solid lightgray;
+            font: 22pt arial;
+        }
+
+    </style>
+
+    <!-- FIXME: load from dist -->
+    <script type="text/javascript" src="./dist/neovis.js"></script>
+
+
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+		// define config car
+		// instantiate nodevis object
+		// draw
+
+		var viz;
+
+		function draw() {
+			var config = {
+				container_id: "viz",
+				server_url: "bolt://localhost:7687",
+				server_user: "neo4j",
+				server_password: "ciao",
+				labels: {
+					"Tweet": {
+                        caption: "text",
+                    },
+					"User": {
+                        caption: "tag",
+                        community: "stanceid",
+						"size": "referring"
+                    },
+					"Stance": {
+                        "caption": "id",
+						"size": 50
+                    },
+					"Sentiment": {
+                        "caption": "id",
+                    },
+					"Hashtag": {
+                        "caption": "text",
+                    },
+					
+				},
+				relationships: {
+					"Mentions": {
+                        "thickness": "defaultThicknessProperty",
+						"caption": false
+					},
+					"Tags": {
+                        "thickness": "defaultThicknessProperty",
+						"caption": false
+					},
+					"RefersTo": {
+                        "thickness": "defaultThicknessProperty",
+						"caption": false,
+						"arrow": true
+					},
+					"UsesHashtag": {
+                        "thickness": "defaultThicknessProperty",
+						"caption": false
+					},
+					"HasSentiment": {
+                        "thickness": "defaultThicknessProperty",
+						"caption": false
+					},
+					"HasStance": {
+                        "thickness": "defaultThicknessProperty",
+						"caption": false
+					}
+				},
+				arrows: true,
+				initial_cypher: "MATCH (n:User)-[r:HasStance]->(m:Stance) WHERE m.id = 'remain' or m.id = 'leave' MATCH (n)-[h:RefersTo]-(k) RETURN n,m,r,h,k"
+				//initial_cypher: "match (a:Hashtag)<-[r:UsesHashtag]-(:User) with a,count(r) as cnt where cnt > 1 and a.text<>'brexit' match (a:Hashtag)<-[r:UsesHashtag]-(u:User) where u.stance = 'remain' or u.stance = 'leave' MATCH (u)-[h:HasStance]->(m:Stance) return a,r,u,h,m"
+				//initial_cypher: "match (a:Hashtag)<-[r:UsesHashtag]-(:User) with a,count(r) as cnt where cnt > 3 and a.text<>'brexit' match (a:Hashtag)<-[r:UsesHashtag]-(u:User) return a,r,u"
+				
+				
+				//initial_cypher: "MATCH (n:User)-[r:UsesHashtag]->(m:Hashtag) WHERE COUNT (r)>1 RETURN n,m,r"
+			};
+
+			viz = new NeoVis.default(config);
+			viz.render();
+			console.log(viz);
+
+		}
+    </script>
+</head>
+<body onload="draw()">
+<div id="viz"></div>
+
+
+Cypher query: <textarea rows="4" cols=50 id="cypher"></textarea><br>
+<input type="submit" value="Submit" id="reload">
+<input type="submit" value="Stabilize" id="stabilize">
+
+
+</body>
+
+<script>
+	$("#reload").click(function() {
+
+		var cypher = $("#cypher").val();
+
+		if (cypher.length > 3) {
+			viz.renderWithCypher(cypher);
+		} else {
+			console.log("reload");
+			viz.reload();
+
+		}
+
+	});
+
+	$("#stabilize").click(function() {
+		viz.stabilize();
+	})
+
+</script>
+</html>
