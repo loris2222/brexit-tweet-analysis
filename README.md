@@ -6,7 +6,7 @@ Mentions between users and used hastags have been analyzed and compared to their
 
 ## Dataset setup
 - Download dataset from [dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KP4XRP)
-- Your `/Data` folder should look like this
+- Your `/data` folder should look like this
 ![folder structure](https://raw.githubusercontent.com/loris2222/brexit-tweet-analysis/master/pics/datafolder.png)
 
 ## Running
