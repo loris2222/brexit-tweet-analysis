@@ -6,8 +6,9 @@ Mentions between users and used hastags have been analyzed and compared to their
 
 ## Dataset setup
 - Download dataset from [dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/KP4XRP)
-- Your `/data` folder should look like this
+- You should download it into a `/data` folder and it should look like this
 ![folder structure](https://raw.githubusercontent.com/loris2222/brexit-tweet-analysis/master/pics/datafolder.png)
+- You can either run the notebooks and use your custom settings for how many tweets to scrape, etc... or you can copy the contents of `/preprocessed` into `/data`
 
 ## Running
 Follow the **workflow** appendix in the **report** to run the project.
