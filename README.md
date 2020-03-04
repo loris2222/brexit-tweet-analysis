@@ -1,1 +1,5 @@
-# brexit-tweet-analysis
+# Brexit tweet analysis
+
+## Info
+
+## Folder setup
