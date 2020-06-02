@@ -37,7 +37,7 @@
 				container_id: "viz",
 				server_url: "bolt://localhost:7687",
 				server_user: "neo4j",
-				server_password: "ciao",
+				server_password: "1234",
 				labels: {
 					"Tweet": {
                         caption: "text",
@@ -56,6 +56,7 @@
                     },
 					"Hashtag": {
                         "caption": "text",
+						"size": "hashtagUseCount"
                     },
 					
 				},
@@ -88,7 +89,7 @@
 				},
 				arrows: true,
 				//initial_cypher: "MATCH (n:User)-[r:HasStance]->(m:Stance) WHERE m.id = 'remain' or m.id = 'leave' MATCH (n)-[h:RefersTo]-(k) RETURN n,m,r,h,k"
-				initial_cypher: "match (a:Hashtag)<-[r:UsesHashtag]-(:User) with a,count(r) as cnt where cnt > 1 and a.text<>'brexit' match (a:Hashtag)<-[r:UsesHashtag]-(u:User) where u.stance = 'remain' or u.stance = 'leave' MATCH (u)-[h:HasStance]->(m:Stance) return a,r,u,h,m"
+				initial_cypher: "match (a:Hashtag)<-[r:UsesHashtag]-(:User) with a,count(r) as cnt where cnt > 1 and a.text<>'brexit' match (a:Hashtag)<-[r:UsesHashtag]-(u:User) where u.stance = 'remain' or u.stance = 'leave' MATCH (u)-[h:HasStance]->(m:Stance) return a,r,u,h"
 				//initial_cypher: "match (a:Hashtag)<-[r:UsesHashtag]-(:User) with a,count(r) as cnt where cnt > 3 and a.text<>'brexit' match (a:Hashtag)<-[r:UsesHashtag]-(u:User) return a,r,u"
 				
 				
